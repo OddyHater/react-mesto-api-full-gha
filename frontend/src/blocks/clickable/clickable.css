@@ -1,0 +1,8 @@
+.clickable {
+  cursor: pointer;
+  transition: opacity .2s linear;
+}
+
+.clickable:hover {
+  opacity: .6;
+}

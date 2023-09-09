@@ -1,0 +1,10 @@
+.card-name-error {
+    color: #FF0000;
+    font-family: Inter;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: left;
+    opacity: 0;
+    max-width: 100%;
+    min-height: 3em;
+}

@@ -1,0 +1,12 @@
+.login__description {
+  margin: 0 auto;
+  margin-top: 15px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+}
+
+.login__description:hover {
+  text-decoration: underline;
+}

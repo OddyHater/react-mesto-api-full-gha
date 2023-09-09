@@ -1,0 +1,8 @@
+.card {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 361px;
+  background-color: #fff;
+}

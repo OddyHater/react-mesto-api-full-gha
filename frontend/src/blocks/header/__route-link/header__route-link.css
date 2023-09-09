@@ -1,0 +1,12 @@
+.header__route-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+
+  transition: opacity 0.2s ease-in-out;
+}
+
+.header__route-link:hover {
+  opacity: 0.6;
+}
