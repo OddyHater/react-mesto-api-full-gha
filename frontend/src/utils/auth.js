@@ -38,6 +38,7 @@ class Auth {
   }
 
   checkToken(token) {
+    console.log(token);
     return fetch(`https://${this._url}/users/me`, {
       method: 'GET',
       headers: {
