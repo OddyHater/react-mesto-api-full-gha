@@ -38,7 +38,7 @@ class Api {
   }
 
   pushCardToServer({name, link, like, id}) {
-    return fetch(`https://mesto.${this._url}/cards`, {
+    return fetch(`https://${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -54,7 +54,7 @@ class Api {
   }
 
   removeCardFromServer(cardID) {
-    return fetch(`https://mesto.${this._url}/cards/${cardID}`, {
+    return fetch(`https://${this._url}/cards/${cardID}`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -64,7 +64,7 @@ class Api {
   }
 
   addLike(cardId) {
-    return fetch(`https://mesto.${this._url}/cards/${cardId}/likes`, {
+    return fetch(`https://${this._url}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
@@ -74,7 +74,7 @@ class Api {
   }
 
   removeLike(cardId) {
-    return fetch(`https://mesto.${this._url}/cards/${cardId}/likes`, {
+    return fetch(`https://${this._url}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -84,7 +84,7 @@ class Api {
   }
 
   changeAvatar(link) {
-    return fetch(`https://mesto.${this._url}/users/me/avatar`, {
+    return fetch(`https://${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -97,7 +97,7 @@ class Api {
   }
 
   getInitialCards() {
-    return fetch(`https://mesto.${this._url}/cards`, {
+    return fetch(`https://${this._url}/cards`, {
       headers: this._headers
     })
     .then(res => {

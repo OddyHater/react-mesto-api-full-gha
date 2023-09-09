@@ -11,7 +11,7 @@ class Auth {
   }
 
   regiser({email, password}) {
-    return fetch(`${this._url}/signup`, {
+    return fetch(`https://${this._url}/signup`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -24,7 +24,7 @@ class Auth {
   }
 
   login({email, password}) {
-    return fetch(`${this._url}/signin`, {
+    return fetch(`https://${this._url}/signin`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -38,7 +38,7 @@ class Auth {
   }
 
   checkToken(token) {
-    return fetch(`${this._url}/users/me`, {
+    return fetch(`https://${this._url}/users/me`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
