@@ -65,7 +65,7 @@ function App() {
         .catch((err) => console.log(err));
       }
   }, [loggedIn]);
-  
+
   useEffect(() => {
     AppApi.getProfileInfo()
       .then((res) => {
@@ -116,17 +116,17 @@ function App() {
           })
          )
         });
-      })       
+      })
       .catch((err) => console.log(err));
   }
-  
+
   function handleUpdateUser(data) {
 
     const newState = Object.assign(currentUser);
 
     newState.name = data.name;
     newState.about = data.about;
-    
+
     AppApi.changeProfileInfo(data)
       .then(() => {
         setCurrentUser(newState);
@@ -136,7 +136,7 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
-  
+
   function handleAvatarUpdate(data) {
 
     const newState = Object.assign(currentUser);
@@ -187,6 +187,7 @@ function App() {
       .then((res) => {
         console.log(res);
         if(!res) {
+          console.log(1);
           return
         }
         localStorage.setItem('token', res.token);
@@ -195,14 +196,14 @@ function App() {
         navigate('/', {replace: true});
       })
       .catch((err) => console.log(err));
-  } 
+  }
 
   function handleLoggout() {
     localStorage.removeItem('token');
     setUserData({
       ...userData,
       _id: '',
-      email: '' 
+      email: ''
     })
     setLoggedIn(false);
   }
@@ -224,14 +225,14 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <CardContext.Provider value={cards}>
 
-      <Header 
+      <Header
         email={userData.email}
         handleLoggoutButtonClick={handleLoggout}
       />
 
       <Routes>
 
-        <Route path="/" element={<ProtectedRoute 
+        <Route path="/" element={<ProtectedRoute
           element={Main}
           loggedIn={loggedIn}
           onEditProfile={() => {setEditProfilePopupOpen(true)}}
@@ -250,16 +251,16 @@ function App() {
 
       <Footer />
 
-      <EditProfilePopup 
-        isOpen={isEditProfilePopupOpen} 
-        onClose={closeAllPopups} 
-        onUpdateUser={handleUpdateUser} 
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}
       />
 
-      <AddPlacePopup 
-        isOpen={isAddPlacePopupOpen} 
-        onClose={closeAllPopups} 
-        onAddPlace={handleAddPlace} 
+      <AddPlacePopup
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onAddPlace={handleAddPlace}
       />
 
       <EditAvatarPopup
@@ -280,7 +281,7 @@ function App() {
         onClose={closeAllPopups}
       />
 
-      <InfoTooltip 
+      <InfoTooltip
         isOpen={isInfoPopupOpen}
         onClose={closeAllPopups}
         name={'info'}
@@ -289,7 +290,7 @@ function App() {
       />
 
       </CardContext.Provider>
-    </CurrentUserContext.Provider>  
+    </CurrentUserContext.Provider>
   );
 }
 

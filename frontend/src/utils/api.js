@@ -5,7 +5,7 @@ class Api {
   }
 
   _getResponseData(res) {
-    if(res.ok) {       
+    if(res.ok) {
       return res.json();
     }
     return Promise.reject(`Ошибка: ${res.status}`);
@@ -15,7 +15,7 @@ class Api {
     return fetch(`https://${this._url}/users/me`, {
       headers: this._headers
     })
-      .then(res => {        
+      .then(res => {
         return this._getResponseData(res);
       });
   }
@@ -75,7 +75,7 @@ class Api {
 
   removeLike(cardId) {
     return fetch(`https://mesto.${this._url}/cards/${cardId}/likes`, {
-      method: 'DELETE', 
+      method: 'DELETE',
       headers: this._headers
     })
     .then(res => {
@@ -83,7 +83,7 @@ class Api {
     })
   }
 
-  changeAvatar(link) {  
+  changeAvatar(link) {
     return fetch(`https://mesto.${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -100,14 +100,14 @@ class Api {
     return fetch(`https://mesto.${this._url}/cards`, {
       headers: this._headers
     })
-    .then(res => {      
+    .then(res => {
       return this._getResponseData(res);
     })
   }
 }
 
 const AppApi = new Api({
-  baseUrl: 'nomoreparties.co/v1/cohort-62',
+  baseUrl: 'api.mentor.oddyhater.nomoredomainsicu.ru',
   headers: {
     authorization: '49fa0164-6f79-4747-b9b7-a7fde6f409fd',
     'Content-type': 'application/json'

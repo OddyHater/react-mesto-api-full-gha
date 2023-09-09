@@ -18,7 +18,7 @@ class Auth {
       },
       body: JSON.stringify({password, email})
     })
-    .then(res => {      
+    .then(res => {
       return this._getResponseData(res);
     })
   }
@@ -31,9 +31,10 @@ class Auth {
       },
       body: JSON.stringify({email, password})
     })
-    .then(res => {      
+    .then(res => {
       return this._getResponseData(res);
     })
+    .catch((err) => console.log(`234: ${err}`));
   }
 
   checkToken(token) {
@@ -44,7 +45,7 @@ class Auth {
         "Authorization" : `Bearer ${token}`
       }
     })
-    .then(res => {      
+    .then(res => {
       return this._getResponseData(res);
     })
   }
