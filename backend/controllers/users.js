@@ -32,6 +32,7 @@ module.exports.findUserById = (req, res, next) => { // GET
 // eslint-disable-next-line consistent-return
 module.exports.getCurrentUser = (req, res, next) => {
   const { _id } = req.user;
+
   User.findById(_id)
     .then((user) => {
       if (!user) {
@@ -90,18 +91,16 @@ module.exports.createUser = (req, res, next) => { // POST
 
 // eslint-disable-next-line consistent-return
 module.exports.updateProfile = (req, res, next) => { // PATCH
-  console.log(`Content-type : '${req.headers["Content-Type"]}'`);
-  console.dir(req.body);
   const { name, about } = req.body;
   if (!name || !about) {
     throw new BadRequestError('Переданы некорректные данные при обновлении профиля.');
   }
   User.findByIdAndUpdate(
-    req.params.id,
+    req.user._id,
     { name, about },
     { new: true, runValidators: true },
   )
-    .then((user) => { res.status(200).json(user); })
+    .then((user) => res.status(200).send({ user }))
     .catch(next);
 };
 
@@ -113,7 +112,7 @@ module.exports.updateAvatar = (req, res, next) => { // PATCH
   }
 
   User.findByIdAndUpdate(
-    req.params.userId,
+    req.user._id,
     { avatar },
     { new: true, runValidators: true },
   )

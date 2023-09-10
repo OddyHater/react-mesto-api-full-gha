@@ -123,12 +123,9 @@ function App() {
   function handleUpdateUser(data) {
 
     const newState = Object.assign(currentUser);
-    console.log(newState);
 
     newState.name = data.name;
     newState.about = data.about;
-
-    console.log(newState);
 
     AppApi.changeProfileInfo(data)
       .then((res) => {
