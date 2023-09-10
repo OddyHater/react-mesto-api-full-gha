@@ -35,10 +35,6 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use('*', (req, res, next) => {
-  next(new NotFoundError('Страница не найдена'));
-});
-
 app.post('/signin', loginValidation, login);
 app.post('/signup', createUserValidation, createUser);
 
@@ -46,6 +42,10 @@ app.use(auth);
 
 app.use('/', userRoutes);
 app.use('/', cardRouter);
+
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('Страница не найдена'));
+});
 
 app.use(errorLogger);
 app.use(errors());
