@@ -56,8 +56,8 @@ function App() {
         .then((res) => {
           setUserData({
             ...userData,
-            _id: res.data._id,
-            email: res.data.email
+            _id: res.user._id,
+            email: res.user.email,
           })
           setLoggedIn(true);
           navigate('/', {replace: true});
@@ -69,7 +69,7 @@ function App() {
   useEffect(() => {
     AppApi.getProfileInfo()
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.user);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -77,7 +77,7 @@ function App() {
   useEffect(() => {
     AppApi.getInitialCards()
       .then((res) => {
-        setCards(res);
+        setCards(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -88,18 +88,18 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     if(isLiked) {
       AppApi.removeLike(card._id)
         .then((newCard) => {
-          setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+          setCards((state) => state.map((c) =>  c._id === card._id ? newCard.data : c))
         })
         .catch((err) => console.log(err));
     } else {
       AppApi.addLike(card._id)
         .then((newCard) => {
-          setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+          setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c))
         })
         .catch((err) => console.log(err));
     }
@@ -123,12 +123,16 @@ function App() {
   function handleUpdateUser(data) {
 
     const newState = Object.assign(currentUser);
+    console.log(newState);
 
     newState.name = data.name;
     newState.about = data.about;
 
+    console.log(newState);
+
     AppApi.changeProfileInfo(data)
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         setCurrentUser(newState);
       })
       .then(() => {
@@ -160,7 +164,7 @@ function App() {
 
     AuthApi.regiser({email, password})
       .then((res) => {
-        if(res.data) {
+        if(res.user) {
           console.log(res);
           setInfoTitle('Вы успешно зарегистрировались!');
           setInfoImageStatus(true);
@@ -185,9 +189,7 @@ function App() {
 
     AuthApi.login({email, password})
       .then((res) => {
-        console.log(res);
         if(!res) {
-          console.log(1);
           return
         }
         localStorage.setItem('token', res.token);
@@ -214,7 +216,7 @@ function App() {
     try {
       await AppApi.pushCardToServer(newCardData);
       const res = await AppApi.getInitialCards();
-      setCards(res);
+      setCards(res.data);
       closeAllPopups();
     } catch (err) {
       console.log(err);

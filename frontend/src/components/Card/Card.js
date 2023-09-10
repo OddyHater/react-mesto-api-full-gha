@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
@@ -6,15 +6,21 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
 
   const userData = useContext(CurrentUserContext);
 
-  const isOwn = card.owner._id === userData._id;
-  const isLiked = card.likes.some(like => like._id === userData._id);
+  const isOwn = card.owner === userData._id;
+  const isLiked = card.likes.some(like => like === userData._id);
   const cardLikeButtonClassName = (
     `card__like ${isLiked ? 'like_active' : ''}`
   );
-  
+
+  useEffect(() => {
+    // console.log(card.owner === userData._id);
+    // console.log(card.owner);
+    // console.log(userData._id, 3);
+  })
+
   return (
     <li className="card">
-      <img 
+      <img
         src={card.link}
         alt={card.name}
         className="card__image"
@@ -23,9 +29,9 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
       <div className="card__info">
         <h3 className="card__name">{card.name}</h3>
         <div className="card__like-wrapper">
-          <button 
-            type="button" 
-            aria-label="Лайк" 
+          <button
+            type="button"
+            aria-label="Лайк"
             className={cardLikeButtonClassName}
             onClick={() => onCardLike(card)}>
 
@@ -33,14 +39,14 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
           <span className="card__like-number">{card.likes.length}</span>
         </div>
       </div>
-      {isOwn && 
-      <button 
-        type="button" 
-        aria-label="Удалить карточку" 
-        className="card__trash-button clickable"
-        onClick={() => onCardDelete(card)}>
-      </button>}
-    </li>    
+      {isOwn &&
+        <button
+          type="button"
+          aria-label="Удалить карточку"
+          className="card__trash-button clickable"
+          onClick={() => onCardDelete(card)}>
+        </button>}
+    </li>
   )
 };
 

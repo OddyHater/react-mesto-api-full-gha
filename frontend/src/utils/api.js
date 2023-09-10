@@ -109,7 +109,7 @@ class Api {
 const AppApi = new Api({
   baseUrl: 'api.mentor.oddyhater.nomoredomainsicu.ru',
   headers: {
-    authorization: '49fa0164-6f79-4747-b9b7-a7fde6f409fd',
+    authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGZjZjYwNjU5MDZlZmJkMWU1NmMwM2YiLCJpYXQiOjE2OTQzMzU5NzMsImV4cCI6MTY5NDQyMjM3M30.JGqE8SzG1pUibICRU2PtT5OP6IhLEBqkqgHEjLETm8g',
     'Content-type': 'application/json'
   }
 });

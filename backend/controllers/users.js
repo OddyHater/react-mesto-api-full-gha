@@ -99,7 +99,7 @@ module.exports.updateProfile = (req, res, next) => { // PATCH
     { name, about },
     { new: true, runValidators: true },
   )
-    .then(() => res.status(200).send({ name, about }))
+    .then((user) => { res.status(200).json(user); })
     .catch(next);
 };
 
@@ -115,7 +115,7 @@ module.exports.updateAvatar = (req, res, next) => { // PATCH
     { avatar },
     { new: true, runValidators: true },
   )
-    .then(() => res.status(200).send({ avatar }))
+    .then((user) => { res.status(200).json(user); })
     .catch(() => {
       next(new BadRequestError('Пользователь по указанному _id не найден.'));
     });

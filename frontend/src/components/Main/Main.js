@@ -9,8 +9,14 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike,
   const userData = useContext(CurrentUserContext);
   const cardData = useContext(CardContext) || [];
 
+  useEffect(() => {
+    setTimeout(() => {
+
+    }, 1000)
+  }, []);
+
   return (
-    
+
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container">
@@ -21,14 +27,14 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike,
           <div className="profile__edit">
             <h1 className="profile__name">{userData.name}</h1>
             <button type="button" aria-label="Редактировать профиль" className="profile__edit-button clickable" onClick={onEditProfile}></button>
-          </div> 
+          </div>
           <p className="profile__description">{userData.about}</p>
         </div>
         <button type="button" aria-label="Добавить карточку" className="profile__add-button clickable" onClick={onAddPlace}></button>
       </section>
       <section className="cards">
         <ul className="cards__list">
-          {cardData.map((card) => (
+          {cardData && cardData.map((card) => (
             <Card
               key={card._id}
               card={card}

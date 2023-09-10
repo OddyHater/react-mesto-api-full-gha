@@ -33,12 +33,10 @@ class Auth {
     })
     .then(res => {
       return this._getResponseData(res);
-    })
-    .catch((err) => console.log(`234: ${err}`));
+    });
   }
 
   checkToken(token) {
-    console.log(token);
     return fetch(`https://${this._url}/users/me`, {
       method: 'GET',
       headers: {
@@ -52,6 +50,6 @@ class Auth {
   }
 }
 
-const AuthApi = new Auth('https://auth.nomoreparties.co');
+const AuthApi = new Auth('api.mentor.oddyhater.nomoredomainsicu.ru');
 
 export default AuthApi;
