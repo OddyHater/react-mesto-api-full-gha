@@ -90,6 +90,8 @@ module.exports.createUser = (req, res, next) => { // POST
 
 // eslint-disable-next-line consistent-return
 module.exports.updateProfile = (req, res, next) => { // PATCH
+  console.log(`Content-type : '${req.headers["Content-Type"]}'`);
+  console.dir(req.body);
   const { name, about } = req.body;
   if (!name || !about) {
     throw new BadRequestError('Переданы некорректные данные при обновлении профиля.');
