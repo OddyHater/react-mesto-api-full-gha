@@ -7,6 +7,8 @@ const { loginValidation, createUserValidation } = require('./middlewares/validat
 
 const { requestLogger, errorLogger } = require('./middlewares/loggers');
 
+const NotFoundError = require('./errors/not-found-err');
+
 const userRoutes = require('./routes/users');
 const cardRouter = require('./routes/cards');
 
@@ -27,10 +29,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 app.use(express.json());
 app.use(requestLogger);
 
-app.use('/404', (req, res, next) => {
-  res.status(404).send({ message: 'Страница не найдена' });
-
-  next();
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('Страница не найдена'));
 });
 
 app.post('/signin', loginValidation, login);
