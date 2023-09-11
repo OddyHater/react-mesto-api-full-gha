@@ -21,7 +21,7 @@ module.exports.createCard = (req, res, next) => { // POST
     throw new BadRequestError('Переданы некорректные данные при создании карточки.');
   }
   Card.create({ name, link, owner: userId })
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.status(201).send({ data: card }))
     .catch((err) => {
       next(err);
     });

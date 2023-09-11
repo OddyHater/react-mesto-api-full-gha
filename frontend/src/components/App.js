@@ -72,7 +72,7 @@ function App() {
         setCurrentUser(res.user);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn]);
 
   useEffect(() => {
     AppApi.getInitialCards()
@@ -80,7 +80,7 @@ function App() {
         setCards(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn]);
 
 
   function handleCardClick(card) {
@@ -161,8 +161,7 @@ function App() {
 
     AuthApi.regiser({email, password})
       .then((res) => {
-        if(res.user) {
-          console.log(res);
+        if(res.data) {
           setInfoTitle('Вы успешно зарегистрировались!');
           setInfoImageStatus(true);
           navigate('/sign-in', {replace: true});

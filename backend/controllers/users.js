@@ -69,7 +69,7 @@ module.exports.createUser = (req, res, next) => { // POST
         about,
         avatar,
       })
-        .then(() => res.status(200).send({
+        .then(() => res.status(201).send({
           data: {
             email,
             name,
