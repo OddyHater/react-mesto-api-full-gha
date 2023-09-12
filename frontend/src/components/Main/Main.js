@@ -10,9 +10,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike,
   const cardData = useContext(CardContext) || [];
 
   useEffect(() => {
-    setTimeout(() => {
-
-    }, 1000)
+  //  console.log(localStorage.getItem('token'));
   }, []);
 
   return (

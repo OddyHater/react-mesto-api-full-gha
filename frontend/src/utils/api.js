@@ -1,7 +1,6 @@
 class Api {
-  constructor({baseUrl, headers}) {
+  constructor({baseUrl}) {
     this._url = baseUrl;
-    this._headers = headers;
   }
 
   _getResponseData(res) {
@@ -13,7 +12,10 @@ class Api {
 
   getProfileInfo() {
     return fetch(`https://${this._url}/users/me`, {
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-type': 'application/json'
+      },
     })
       .then(res => {
         return this._getResponseData(res);
@@ -23,7 +25,10 @@ class Api {
   changeProfileInfo(item) {
     return fetch(`https://${this._url}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-type': 'application/json'
+      },
       body: JSON.stringify({
         name: item.name,
         about: item.about
@@ -40,7 +45,10 @@ class Api {
   pushCardToServer({name, link, like, id}) {
     return fetch(`https://${this._url}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-type': 'application/json'
+      },
       body: JSON.stringify({
         name: name,
         link: link,
@@ -56,7 +64,10 @@ class Api {
   removeCardFromServer(cardID) {
     return fetch(`https://${this._url}/cards/${cardID}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-type': 'application/json'
+      },
     })
     .then(res => {
       return this._getResponseData(res);
@@ -66,7 +77,10 @@ class Api {
   addLike(cardId) {
     return fetch(`https://${this._url}/cards/${cardId}/likes`, {
       method: 'PUT',
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-type': 'application/json'
+      },
     })
     .then(res => {
       return this._getResponseData(res);
@@ -76,7 +90,10 @@ class Api {
   removeLike(cardId) {
     return fetch(`https://${this._url}/cards/${cardId}/likes`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-type': 'application/json'
+      },
     })
     .then(res => {
       return this._getResponseData(res);
@@ -86,7 +103,10 @@ class Api {
   changeAvatar(link) {
     return fetch(`https://${this._url}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-type': 'application/json'
+      },
       body: JSON.stringify({
         avatar: link
       })
@@ -98,7 +118,11 @@ class Api {
 
   getInitialCards() {
     return fetch(`https://${this._url}/cards`, {
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-type': 'application/json'
+      },
+
     })
     .then(res => {
       return this._getResponseData(res);
@@ -107,11 +131,7 @@ class Api {
 }
 
 const AppApi = new Api({
-  baseUrl: 'api.mentor.oddyhater.nomoredomainsicu.ru',
-  headers: {
-    authorization: `Bearer ${localStorage.getItem('token')}`,
-    'Content-type': 'application/json'
-  }
+  baseUrl: 'api.mentor.oddyhater.nomoredomainsicu.ru'
 });
 
 export default AppApi;

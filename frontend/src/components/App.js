@@ -54,6 +54,7 @@ function App() {
     if(token) {
       AuthApi.checkToken(token)
         .then((res) => {
+          console.log(res);
           setUserData({
             ...userData,
             _id: res.user._id,
@@ -64,28 +65,26 @@ function App() {
         })
         .catch((err) => console.log(err));
       }
-  }, [loggedIn]);
+  }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(token) {
+
       AppApi.getProfileInfo()
       .then((res) => {
         setCurrentUser(res.user);
       })
       .catch((err) => console.log(err));
-    }
+
   }, [loggedIn]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(token) {
+
       AppApi.getInitialCards()
       .then((res) => {
         setCards(res.data);
       })
       .catch((err) => console.log(err));
-    }
+
   }, [loggedIn]);
 
 
@@ -196,7 +195,7 @@ function App() {
           return
         }
         localStorage.setItem('token', res.token);
-
+        
         setLoggedIn(true);
         navigate('/', {replace: true});
       })
