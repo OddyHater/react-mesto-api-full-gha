@@ -67,19 +67,25 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    AppApi.getProfileInfo()
+    const token = localStorage.getItem('token');
+    if(token) {
+      AppApi.getProfileInfo()
       .then((res) => {
         setCurrentUser(res.user);
       })
       .catch((err) => console.log(err));
+    }
   }, [loggedIn]);
 
   useEffect(() => {
-    AppApi.getInitialCards()
+    const token = localStorage.getItem('token');
+    if(token) {
+      AppApi.getInitialCards()
       .then((res) => {
         setCards(res.data);
       })
       .catch((err) => console.log(err));
+    }
   }, [loggedIn]);
 
 
@@ -171,7 +177,8 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setInfoTitle('Что-то пошло не так! Попробуйте ещё раз.');
+        setInfoImageStatus(false);
       })
       .finally(() => {
         setIsInfoPopupOpen(true);

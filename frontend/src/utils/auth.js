@@ -20,7 +20,7 @@ class Auth {
     })
     .then(res => {
       return this._getResponseData(res);
-    })
+    });
   }
 
   login({email, password}) {
@@ -46,7 +46,7 @@ class Auth {
     })
     .then(res => {
       return this._getResponseData(res);
-    })
+    });
   }
 }
 
